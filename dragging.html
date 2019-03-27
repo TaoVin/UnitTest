@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .move {
+            width: 129px;
+            height: 140px;
+            background-color: #ff8000;
+            position: absolute;
+
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="move" id = "moveitem">
+    </div>
+    <script>
+
+        var item = document.getElementById("moveitem");
+        var dragging ;
+        var tLeft , tTop;
+        item.addEventListener("mousedown" , function(e){
+            if ( e.target == item){
+                dragging = true;
+                console.info("dragging:"+dragging);
+                var moveItemRect = item.getBoundingClientRect();
+                tLeft = e.clientX - moveItemRect.left;
+                tTop = e.clientY - moveItemRect.top;
+            }
+        });
+        item.addEventListener("mouseup" , function (e) {
+            dragging = false;
+            console.info("dragging:"+dragging);
+        });
+        item.addEventListener("mousemove" , function(e){
+            if(dragging){
+                var moveX = e.clientX - tLeft;
+                var moveY = e.clientY - tTop;
+                item.style.left = moveX +"px";
+                item.style.top = moveY + "px";
+            }
+        });
+    </script>
+</body>
+</html>
